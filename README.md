@@ -25,14 +25,14 @@ This Python script downloads bass tabs from Ultimate Guitar, extracts the tab co
    pip install requests
    ```
 
-3. Download the script file (`ultimate_guitar_tab_combiner.py`) to your local machine.
+3. Download the script file (`main.py`) to your local machine.
 
 ## Usage
 
 1. Run the script from the command line:
 
    ```
-   python ultimate_guitar_tab_combiner.py [max_length]
+   python main.py [max_length]
    ```
 
    Where `[max_length]` is an optional argument to set the maximum length of each combined string (default is 400 characters).
@@ -46,7 +46,7 @@ This Python script downloads bass tabs from Ultimate Guitar, extracts the tab co
 ## Example
 
 ```
-python ultimate_guitar_tab_combiner.py 500
+python main.py 500
 Enter the Ultimate Guitar URL for the bass tab: https://tabs.ultimate-guitar.com/tab/john-coltrane/giant-steps-bass-2586318
 
 
