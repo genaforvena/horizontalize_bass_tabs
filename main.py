@@ -32,22 +32,22 @@ def extract_and_combine_tabs(text):
         for line in lines:
             clean_line = clear_line(line)
             if 'G|' in line:
-                if not g_strings or len(g_strings[-1]) + len(line) + 1 > 260:
+                if not g_strings or len(g_strings[-1]) + len(line) + 1 > 400:
                     g_strings.append(clean_line)
                 else:
                     g_strings[-1] += (clean_line) + " "
             if 'D|' in line:
-                if not d_strings or len(d_strings[-1]) + len(line) + 1 > 260:
+                if not d_strings or len(d_strings[-1]) + len(line) + 1 > 400:
                     d_strings.append(clean_line)
                 else:
                     d_strings[-1] += clean_line + " "
             if 'A|' in line:
-                if not a_strings or len(a_strings[-1]) + len(line) + 1 > 260:
+                if not a_strings or len(a_strings[-1]) + len(line) + 1 > 400:
                     a_strings.append(clean_line)
                 else:
                     a_strings[-1] += clean_line + " "
             if 'E|' in line:
-                if not e_strings or len(e_strings[-1]) + len(line) + 1 > 260:
+                if not e_strings or len(e_strings[-1]) + len(line) + 1 > 400:
                     e_strings.append(clean_line)
                 else:
                     e_strings[-1] += clean_line + " "
