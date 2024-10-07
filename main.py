@@ -13,38 +13,52 @@ def download_tab(url):
         print(f"An error occurred while downloading the tab: {e}")
         return None
 
+def clear_line(line):
+    return re.sub(r'[^0-9|-]', '', line)
+
 def extract_and_combine_tabs(text):
     # Extract tab sections
     tab_pattern = r'\[tab\](.*?)\[/tab\]'
     tab_sections = re.findall(tab_pattern, text, re.DOTALL)
     
-    g_string = ""
-    d_string = ""
-    a_string = ""
-    e_string = ""
+    g_strings = []
+    d_strings = []
+    a_strings = []
+    e_strings = []
     
     for tab in tab_sections:
         lines = tab.strip().split('\\n')
 
         for line in lines:
+            clean_line = clear_line(line)
             if 'G|' in line:
-                g_string += line + " "
+                if not g_strings or len(g_strings[-1]) + len(line) + 1 > 260:
+                    g_strings.append(clean_line)
+                else:
+                    g_strings[-1] += (clean_line) + " "
             if 'D|' in line:
-                d_string += line + " "
+                if not d_strings or len(d_strings[-1]) + len(line) + 1 > 260:
+                    d_strings.append(clean_line)
+                else:
+                    d_strings[-1] += clean_line + " "
             if 'A|' in line:
-                a_string += line + " "
+                if not a_strings or len(a_strings[-1]) + len(line) + 1 > 260:
+                    a_strings.append(clean_line)
+                else:
+                    a_strings[-1] += clean_line + " "
             if 'E|' in line:
-                e_string += line + " "
+                if not e_strings or len(e_strings[-1]) + len(line) + 1 > 260:
+                    e_strings.append(clean_line)
+                else:
+                    e_strings[-1] += clean_line + " "
 
-    
-    tabs = f"G{g_string}\nD{d_string}\nA{a_string}\nE{e_string}"
-    g_string = re.sub(r'[^0-9|-]', '', g_string)  
-    d_string = re.sub(r'[^0-9|-]', '', d_string)  
-    a_string = re.sub(r'[^0-9|-]', '', a_string)  
-    e_string = re.sub(r'[^0-9|-]', '', e_string)  
-    
-    combined_tabs = f"G{g_string}\nD{d_string}\nA{a_string}\nE{e_string}"
-    return combined_tabs
+    combined_tabs = ""
+    for g, d, a, e in zip(g_strings, d_strings, a_strings, e_strings):
+        combined_tabs += 'G|' + g + '\n' + 'D|' + d + '\n' + 'A|' + a + '\n' + 'E|' + e + '\n' + '\n\n'
+
+#      
+
+    return combined_tabs.strip()
 
 def main():
     print("Ultimate Guitar Bass Tab Downloader and String Combiner")
