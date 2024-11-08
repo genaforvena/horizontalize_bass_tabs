@@ -42,13 +42,17 @@ def main():
     print("Ultimate Guitar Bass Tab Downloader and String Combiner")
     print("------------------------------------------------------")
     
-    url = input("Enter the Ultimate Guitar URL for the bass tab: ")
+    if len(sys.argv) > 2:
+        url = str(sys.argv[2]) 
+    else:
+        url = input("Enter the Ultimate Guitar URL for the bass tab: ")
     
     if len(sys.argv) > 1:
         max_length = int(sys.argv[1])
     else:
         max_length = 400
-    
+
+   
     html_content = download_tab(url)
     
     if html_content:
