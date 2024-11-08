@@ -59,7 +59,7 @@ def main():
         combined_tabs = extract_and_combine_tabs(html_content, max_length)
         
         if combined_tabs:
-            output_file = "combined_tab.txt"
+            output_file = url.split('/')[-1] + '.txt'
             with open(output_file, 'w', encoding='utf-8') as file:
                 file.write(combined_tabs)
             print(f"\nCombined tab has been saved to {output_file}")
