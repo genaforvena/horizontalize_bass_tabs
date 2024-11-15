@@ -15,7 +15,7 @@ def download_tab(url):
 def clear_line(line):
     return re.sub(r'[^0-9|-]', '', line)
 
-def extract_and_combine_tabs(text, max_length=200):
+def extract_and_combine_tabs(text, max_length=160):
     tab_pattern = r'\[tab\](.*?)\[/tab\]'
     tab_sections = re.findall(tab_pattern, text, re.DOTALL)
     
@@ -42,17 +42,14 @@ def main():
     print("Ultimate Guitar Bass Tab Downloader and String Combiner")
     print("------------------------------------------------------")
     
-    if len(sys.argv) > 2:
-        url = str(sys.argv[2]) 
+    if len(sys.argv) > 1:
+        url = str(sys.argv[1]) 
     else:
         url = input("Enter the Ultimate Guitar URL for the bass tab: ")
     
-    if len(sys.argv) > 1:
-        max_length = int(sys.argv[1])
-    else:
-        max_length = 400
-
-   
+    if len(sys.argv) > 2:
+        max_length = int(sys.argv[2])
+        
     html_content = download_tab(url)
     
     if html_content:
