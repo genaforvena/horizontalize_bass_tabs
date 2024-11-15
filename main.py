@@ -15,7 +15,7 @@ def download_tab(url):
 def clear_line(line):
     return re.sub(r'[^0-9|-]', '', line)
 
-def extract_and_combine_tabs(text, max_length=400):
+def extract_and_combine_tabs(text, max_length=200):
     tab_pattern = r'\[tab\](.*?)\[/tab\]'
     tab_sections = re.findall(tab_pattern, text, re.DOTALL)
     
